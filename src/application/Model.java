@@ -2,25 +2,26 @@ package application;
 
 import java.time.LocalDate;
 
-public class Model {
-	private String name;
+public class Model{
+	private String text;
 	private int number;
 	private boolean bool;
 	private LocalDate date;
 	
 	public Model(){
-		name = "";
+		text = "";
 		number = 0;
 		bool = false;
 		date = LocalDate.now();
 	}
 	
-	public String getName() {
-		return name;
+	public String getText() {
+		return text;
 	}
 	
-	public void setNom(String newName) {
-		name = newName;
+	public void setText(String newText) {
+		System.out.println("Modification texte : " + newText);
+		text = newText;
 	}
 	
 	public int getNumber() {
@@ -28,6 +29,7 @@ public class Model {
 	}
 	
 	public void setNumber(int newNumber) {
+		System.out.println("Modification nombre : " + newNumber);
 		number = newNumber;
 	}
 	
@@ -36,6 +38,7 @@ public class Model {
 	}
 	
 	public void setBool(boolean newBool) {
+		System.out.println("Modification boolean: " + newBool);
 		bool = newBool;
 	}
 	
@@ -44,6 +47,7 @@ public class Model {
 	}
 	
 	public void setDate(LocalDate newDate) {
+		System.out.println("Modification date : " + newDate);
 		date = newDate;
 	}
 }
