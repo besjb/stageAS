@@ -1,6 +1,7 @@
 package application;
 
 import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
 
 import org.controlsfx.control.PropertySheet;
 import org.controlsfx.property.BeanProperty;
@@ -20,18 +21,22 @@ public class Main extends Application {
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
-			Model model = new Model();
-		    
+			Model model = new Model();			
+			ModelBeanInfo modelBeanInfo = new ModelBeanInfo();
+			PropertyDescriptor[] PropDescriptor = modelBeanInfo.getPropertyDescriptors();
+			ArrayList<BeanProperty> beanPropertylist = new ArrayList<>();
 			
-			BeanProperty beanText = new BeanProperty(model, new PropertyDescriptor("text", model.getClass()));
-			BeanProperty beanNumber = new BeanProperty(model, new PropertyDescriptor("number", model.getClass()));
-			BeanProperty beanBool = new BeanProperty(model, new PropertyDescriptor("bool", model.getClass()));
-			BeanProperty beanDate = new BeanProperty(model, new PropertyDescriptor("date", model.getClass()));
+			for(PropertyDescriptor i : PropDescriptor) {
+				beanPropertylist.add(new BeanProperty(model, i));
+			}
 			
 			ObservableList<PropertySheet.Item> list = FXCollections.observableArrayList();
-			list.addAll(beanText, beanNumber, beanBool, beanDate);
-			PropertySheet propertySheet = new PropertySheet(list);
 			
+			for(BeanProperty y : beanPropertylist) {
+				list.add(y);
+			}
+			
+			PropertySheet propertySheet = new PropertySheet(list);
 			root.getChildren().add(propertySheet);
 			primaryStage.setScene(scene);
 			primaryStage.show();
